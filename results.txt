@@ -1,0 +1,12 @@
+
+vagrant@vagrant:/vagrant/log_project$ python news_report.py
+The most three popular articles:
+ Candidate is jerk - 338647 views
+ Bears love berries - 253801 views
+ Bad things gone - 170098 views
+
+The most popular author:
+ Ursula La Multa - 507594 views
+
+The days with error rate higher than 1%:
+ July 17, 2016 - 2.3%
