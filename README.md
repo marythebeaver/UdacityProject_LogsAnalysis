@@ -36,14 +36,14 @@ There are two views created in the news database. The first view is for the firs
 	—notes: two subquery are used,  first one used “count” and “group” to calculate the total number of logs on each day, and use CAST to take only date as the calculation unit, and the second one used the similar way to calculate the error logs on each days, wherein the logs which are not “200 OK” are regarded as error.-
 
 
-## first task ##
+## The first task ##
 In the python source code file, the sql query `select slug, count(*) as num from articles_details group by slug order by num desc limit 3` is used to select the slugs of the top three articles from the first view articles_details and put the result in result_ar, wherein —count- and —limit- are used to find out the top three articles with most logs (views).
 
 
-## second task ##
+## The second task ##
 The sql query `select name, count(*) as num from articles_details group by name order by num desc limit 1;` to select the most popular author from the first view articles_details and put the result in result_au, wherein —count- and —limit- are used to find out the author with most logs (views).
 
 
-## third task ##
+## The third task ##
 The sql query `select total_date as date,(error_num*100.0/total_num) as rate from log_times where (error_num*100.0/total_num) > 1;` to select the days with error rate higher than 1% from the second view log_times and put the result in result_er, wherein (error_num*100.0/total_num) is used to calculate the error rate percentage.
 
