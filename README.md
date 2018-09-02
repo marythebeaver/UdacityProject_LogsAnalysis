@@ -1,1 +1,49 @@
 # UdacityProject_LogsAnalysis
+For the ppl who are not from Udacity, this is a project based on the database provided by Udacity for full stack course, it is used to analyzed the data in the news database for completing the given tasks. You may find out the details from Udacity's webside.
+
+For the reveiwers from Udacity, thank you for reviewing the project based on news database. This project includes three tasks:
+- finding out the most three popular articles
+- finding out the most popular author
+- the days which error rate was higher than 1%
+
+
+
+## Installation ##
+
+There are two views created in the news database. The first view is for the first and second tasks and the second view is for the last task. Therefore please use the following code to create the views in your news database in order to execute the source code(news_report.py).
+
+
+1. a view articles_details is created to include the log and authors information of articles:
+	```
+	create view articles_details as
+	select articles.slug, log.path, log.id, authors.name, authors.id from articles
+	left join log ON log.path LIKE CONCAT ('%',articles.slug)
+	left join authors ON articles.author=authors.id
+	```
+	—notes: the table articles and authors do not have any column with the same content, but the column log.path includes a directory named by articles.slug, so CONCAT ('%',articles.slug) is used to join the two tables.-
+
+2. view log_times is created to show the total number and error number of log on each days:
+	
+	```
+	select * from
+	(select CAST(time AS DATE) as total_date, count(*) as total_num
+	from log group by CAST(time AS DATE)) as a
+	left join
+	(select CAST(time AS DATE) as error_date, count(*) as error_num
+	from log where status!='200 OK' group by CAST(time AS DATE)) as b
+	ON a.total_date=b.error_date;
+	```
+	—notes: two subquery are used,  first one used “count” and “group” to calculate the total number of logs on each day, and use CAST to take only date as the calculation unit, and the second one used the similar way to calculate the error logs on each days, wherein the logs which are not “200 OK” are regarded as error.-
+
+
+## first task ##
+In the python source code file, the sql query `select slug, count(*) as num from articles_details group by slug order by num desc limit 3` is used to select the slugs of the top three articles from the first view articles_details and put the result in result_ar, wherein —count- and —limit- are used to find out the top three articles with most logs (views).
+
+
+## second task ##
+The sql query `select name, count(*) as num from articles_details group by name order by num desc limit 1;` to select the most popular author from the first view articles_details and put the result in result_au, wherein —count- and —limit- are used to find out the author with most logs (views).
+
+
+## third task ##
+The sql query `select total_date as date,(error_num*100.0/total_num) as rate from log_times where (error_num*100.0/total_num) > 1;` to select the days with error rate higher than 1% from the second view log_times and put the result in result_er, wherein (error_num*100.0/total_num) is used to calculate the error rate percentage.
+
