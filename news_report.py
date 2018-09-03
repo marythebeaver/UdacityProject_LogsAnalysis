@@ -1,4 +1,4 @@
-# report news
+#!/usr/bin/env python2.7
 # using psycopg2
 
 
