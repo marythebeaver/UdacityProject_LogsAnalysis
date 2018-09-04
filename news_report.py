@@ -41,9 +41,9 @@ conn_er.close()
 print (
     'The most three popular articles:\n' +
     ' %s - %d views\n %s - %d views\n %s - %d views\n'
-    % (result_ar[0][0].replace('-',' ').capitalize(), result_ar[0][1],
-        result_ar[1][0].replace('-',' ').capitalize(), result_ar[1][1],
-        result_ar[2][0].replace('-',' ').capitalize(), result_ar[2][1]))
+    % (result_ar[0][0].replace('-', ' ').capitalize(), result_ar[0][1],
+        result_ar[1][0].replace('-', ' ').capitalize(), result_ar[1][1],
+        result_ar[2][0].replace('-', ' ').capitalize(), result_ar[2][1]))
 print (
     'The most popular author:\n' +
     ' %s - %d views\n' % (result_au[0][0], result_au[0][1]))
