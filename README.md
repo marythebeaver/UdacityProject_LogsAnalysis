@@ -1,5 +1,5 @@
 # UdacityProject_LogsAnalysis
-For the ppl who are not from Udacity, this is a project based on the database provided by Udacity for full stack course, it is used to analyzed the data in the news database for completing the given tasks. You may find out the details from Udacity's webside.
+This is a project based on the database provided by Udacity for full stack course, it is used to analyzed the data in the news database for completing the given tasks. You may find out the details from Udacity's webside.
 
 For the reveiwers from Udacity, thank you for reviewing the project based on news database. This project includes three tasks:
 - finding out the most three popular articles
@@ -7,8 +7,26 @@ For the reveiwers from Udacity, thank you for reviewing the project based on new
 - the days which error rate was higher than 1%
 
 
+## Getting Started ##
+### PreRequisites ###
+- Python 2.7
+- Vagrant
+- VirtualBox
 
-## Installation ##
+### setup ###
+1. Install Vagrant and VirtualBox
+2. Download or Clone fullstack-nanodegree-vm repository : https://github.com/udacity/fullstack-nanodegree-vm.
+3. Download the news database from https://d17h27t6h515a5.cloudfront.net/topher/2016/August/57b5f748_newsdata/newsdata.zip.
+4. Put 'newsdata.sql' into the vagrant directory which is shared with your virtual machine.
+5. cd to vagrant directory and use the following command to launch the Vagrant VM:
+	`$ vagrant up`
+	`$ vagrant ssh`
+6. cd into the vagrant directory and use the command following command to load the news database on your system
+	`psql -d news -f newsdata.sql`
+7. Now you have the news database, which includes articles, authors, log, please use `select * form table` to explore the three tables.
+
+
+## Create views ##
 
 There are two views created in the news database. The first view is for the first and second tasks and the second view is for the last task. Therefore please use the following code to create the views in your news database in order to execute the source code(news_report.py).
 
