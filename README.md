@@ -8,6 +8,7 @@ For the reveiwers from Udacity, thank you for reviewing the project based on new
 
 
 ## Getting Started ##
+
 ### PreRequisites ###
 - Python 2.7
 - Vagrant
@@ -28,7 +29,7 @@ For the reveiwers from Udacity, thank you for reviewing the project based on new
 
 ## Create views ##
 
-There are two views created in the news database. The first view is for the first and second tasks and the second view is for the last task. Therefore please use the following code to create the views in your news database in order to execute the source code(news_report.py).
+There are two views created have to be created in the news database to run the code (news_report.py), wherein the first view is for the first and second tasks and the second view is for the last task. Please use the following code to create the views.
 
 
 1. a view articles_details is created to include the log and authors information of articles:
@@ -53,15 +54,27 @@ There are two views created in the news database. The first view is for the firs
 	```
 	—notes: two subquery are used,  first one used “count” and “group” to calculate the total number of logs on each day, and use CAST to take only date as the calculation unit, and the second one used the similar way to calculate the error logs on each days, wherein the logs which are not “200 OK” are regarded as error.-
 
+## Run the code ##
+After creating the views, you may use `python news_report.py` to run the news_report.py file and see the output of the three given tasks.
+- The most three popular articles
+- The most popular author
+- The days with error rate higher than 1%
 
-## The first task ##
+## Code Description ##
+The code uses python2.7 / imports psycopg2 and datetime.
+
+### The first task ###
 In the python source code file, the sql query `select slug, count(*) as num from articles_details group by slug order by num desc limit 3` is used to select the slugs of the top three articles from the first view articles_details and put the result in result_ar, wherein —count- and —limit- are used to find out the top three articles with most logs (views).
 
 
-## The second task ##
+### The second task ###
 The sql query `select name, count(*) as num from articles_details group by name order by num desc limit 1;` to select the most popular author from the first view articles_details and put the result in result_au, wherein —count- and —limit- are used to find out the author with most logs (views).
 
 
-## The third task ##
+### The third task ###
 The sql query `select total_date as date,(error_num*100.0/total_num) as rate from log_times where (error_num*100.0/total_num) > 1;` to select the days with error rate higher than 1% from the second view log_times and put the result in result_er, wherein (error_num*100.0/total_num) is used to calculate the error rate percentage.
+
+### Print ###
+At the end, use python code to format the output and print the results of the three tasks.
+
 
