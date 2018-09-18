@@ -44,7 +44,7 @@ There are two views created have to be created in the news database to run the c
 2. view log_times is created to show the total number and error number of log on each days:
 
 	```
-  create view log_times as
+	create view log_times as
 	select * from
 	(select CAST(time AS DATE) as total_date, count(*) as total_num
 	from log group by CAST(time AS DATE)) as a
