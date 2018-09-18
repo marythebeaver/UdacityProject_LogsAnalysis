@@ -40,28 +40,34 @@ def PopAuthor():
     return cursor.fetchall()
     db.close()
 
+
 # days having error more than 1%
-conn_er = psycopg2.connect(database="news")
-cur_er = conn_er.cursor()
-cur_er.execute("""select total_date as date,(error_num*100.0/total_num) as rate
-    from log_times
-    where (error_num*100.0/total_num) > 1;""")
-result_er = cur_er.fetchall()
-conn_er.close()
+def HighError():
+    db, cursor = connect()
+    query_er = """select total_date as date,(error_num*100.0/total_num) as rate
+        from log_times
+        where (error_num*100.0/total_num) > 1;"""
+    cursor.execute(query_er)
+    return cursor.fetchall()
+    db.close()
 
 
 # print resultes
 result_ar = PopArticles()
+result_au = PopAuthor()
+result_er = HighError()
+
 print (
     'The most three popular articles:\n' +
     ' %s - %d views\n %s - %d views\n %s - %d views\n'
     % (result_ar[0][0].replace('-', ' ').capitalize(), result_ar[0][1],
         result_ar[1][0].replace('-', ' ').capitalize(), result_ar[1][1],
         result_ar[2][0].replace('-', ' ').capitalize(), result_ar[2][1]))
-result_au = PopAuthor()
+
 print (
     'The most popular author:\n' +
     ' %s - %d views\n' % (result_au[0][0], result_au[0][1]))
+
 print (
     'The days with error rate higher than 1'+'%:\n' + ' %s - %0.1f'
     % (result_er[0][0].strftime('%B %d, %Y'), result_er[0][1])+'%\n')
