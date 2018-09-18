@@ -9,6 +9,7 @@
 import psycopg2
 from datetime import datetime
 
+
 # add a function for connecting news
 def connect(database_name="news"):
     try:
