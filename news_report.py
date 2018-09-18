@@ -35,7 +35,7 @@ def PopAuthor():
     db, cursor = connect()
     query_au = """select name, count(*) as num
         from articles_details
-        group by name order by num desc limit 1;"""
+        group by name order by num desc;"""
     cursor.execute(query_au)
     return cursor.fetchall()
     db.close()
