@@ -58,15 +58,15 @@ result_ar = PopArticles()
 result_au = PopAuthor()
 result_er = HighError()
 
-print (
+print(
     'The most three popular articles:')
-for (title, count) in result_ar:
+for(title, count) in result_ar:
     print(" {} - {} views".format(title.replace('-', ' ').capitalize(), count))
 
-print (
+print(
     '\nThe most popular author:\n' +
     ' %s - %d views\n' % (result_au[0][0], result_au[0][1]))
 
-print (
+print(
     'The days with error rate higher than 1'+'%:\n' + ' %s - %0.1f'
     % (result_er[0][0].strftime('%B %d, %Y'), result_er[0][1])+'%\n')
