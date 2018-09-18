@@ -58,14 +58,12 @@ result_au = PopAuthor()
 result_er = HighError()
 
 print (
-    'The most three popular articles:\n' +
-    ' %s - %d views\n %s - %d views\n %s - %d views\n'
-    % (result_ar[0][0].replace('-', ' ').capitalize(), result_ar[0][1],
-        result_ar[1][0].replace('-', ' ').capitalize(), result_ar[1][1],
-        result_ar[2][0].replace('-', ' ').capitalize(), result_ar[2][1]))
+    'The most three popular articles:')
+for (title, count) in result_ar:
+    print(" {} - {} views".format(title.replace('-', ' ').capitalize(), count))
 
 print (
-    'The most popular author:\n' +
+    '\nThe most popular author:\n' +
     ' %s - %d views\n' % (result_au[0][0], result_au[0][1]))
 
 print (

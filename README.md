@@ -35,14 +35,14 @@ There are two views created have to be created in the news database to run the c
 1. a view articles_details is created to include the log and authors information of articles:
 	```
 	create view articles_details as
-	select articles.slug, log.path, log.id, authors.name, authors.id from articles
+	select articles.slug, log.path, log.id as log, authors.name, authors.id from articles
 	left join log ON log.path LIKE CONCAT ('%',articles.slug)
 	left join authors ON articles.author=authors.id
 	```
 	—notes: the table articles and authors do not have any column with the same content, but the column log.path includes a directory named by articles.slug, so CONCAT ('%',articles.slug) is used to join the two tables.-
 
 2. view log_times is created to show the total number and error number of log on each days:
-	
+
 	```
 	select * from
 	(select CAST(time AS DATE) as total_date, count(*) as total_num
@@ -76,5 +76,3 @@ The sql query `select total_date as date,(error_num*100.0/total_num) as rate fro
 
 ### Print ###
 At the end, use python code to format the output and print the results of the three tasks.
-
-

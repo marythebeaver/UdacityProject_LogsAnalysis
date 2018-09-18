@@ -1,4 +1,4 @@
-
+/Users/anna/Desktop/udacity/FSND-Virtual-Machine/vagrant/UdacityProject_LogsAnalysis/results.txt
 vagrant@vagrant:/vagrant/log_project$ python news_report.py
 The most three popular articles:
  Candidate is jerk - 338647 views
