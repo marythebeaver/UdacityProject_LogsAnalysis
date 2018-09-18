@@ -31,13 +31,14 @@ def PopArticles():
 
 
 # the most popular author
-conn_au = psycopg2.connect(database="news")
-cur_au = conn_au.cursor()
-cur_au.execute("""select name, count(*) as num
-    from articles_details
-    group by name order by num desc limit 1;""")
-result_au = cur_au.fetchall()
-conn_au.close()
+def PopAuthor():
+    db, cursor = connect()
+    query_au = """select name, count(*) as num
+        from articles_details
+        group by name order by num desc limit 1;"""
+    cursor.execute(query_au)
+    return cursor.fetchall()
+    db.close()
 
 # days having error more than 1%
 conn_er = psycopg2.connect(database="news")
@@ -57,6 +58,7 @@ print (
     % (result_ar[0][0].replace('-', ' ').capitalize(), result_ar[0][1],
         result_ar[1][0].replace('-', ' ').capitalize(), result_ar[1][1],
         result_ar[2][0].replace('-', ' ').capitalize(), result_ar[2][1]))
+result_au = PopAuthor()
 print (
     'The most popular author:\n' +
     ' %s - %d views\n' % (result_au[0][0], result_au[0][1]))
