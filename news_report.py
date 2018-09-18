@@ -9,14 +9,26 @@
 import psycopg2
 from datetime import datetime
 
+# add a function for connecting news
+def connect(database_name="news"):
+    try:
+        db = psycopg2.connect("dbname={}".format(database_name))
+        cursor = db.cursor()
+        return db, cursor
+    except psycopg2.DatabaseError, e:
+        print('fail to connect to news')
+
+
 # the most popular three articles
-conn_ar = psycopg2.connect(database="news")
-cur_ar = conn_ar.cursor()
-cur_ar.execute("""select slug, count(*) as num
-    from articles_details
-    group by slug order by num desc limit 3;""")
-result_ar = cur_ar.fetchall()
-conn_ar.close()
+def PopArticles():
+    db, cursor = connect()
+    query_ar = """select slug, count(*) as num
+        from articles_details
+        group by slug order by num desc limit 3;"""
+    cursor.execute(query_ar)
+    return cursor.fetchall()
+    db.close()
+
 
 # the most popular author
 conn_au = psycopg2.connect(database="news")
@@ -38,6 +50,7 @@ conn_er.close()
 
 
 # print resultes
+result_ar = PopArticles()
 print (
     'The most three popular articles:\n' +
     ' %s - %d views\n %s - %d views\n %s - %d views\n'
